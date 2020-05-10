@@ -2889,7 +2889,7 @@
             "Earthy",
             "Sweet"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Banana-Cream-Og",
@@ -6507,7 +6507,7 @@
             "Sweet",
             "Earthy"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Brain-Candy",
@@ -10462,7 +10462,7 @@
             "Pine",
             "Pungent"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Crazy-Miss-Hyde",
@@ -11961,7 +11961,7 @@
         "flavours": [
             "nan"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Don-Shula",
@@ -12968,7 +12968,7 @@
             "Pine",
             "Earthy"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Earthshaker-Og",
@@ -14398,7 +14398,7 @@
             "Sweet",
             "Skunk"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Frosty-Jesus",
@@ -15082,7 +15082,7 @@
             "Pungent",
             "Grape"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Ghost-Cookies",
@@ -15840,7 +15840,7 @@
         "flavours": [
             "nan"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Goo",
@@ -16729,7 +16729,7 @@
             "Woody",
             "Pine"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Green-Kush",
@@ -16837,7 +16837,7 @@
             "Chemical",
             "Tar"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Green-Poison",
@@ -17099,7 +17099,7 @@
         "flavours": [
             "nan"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Gumbo",
@@ -17852,7 +17852,7 @@
             "Sweet",
             "Citrus"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Hawaiian-Trinity",
@@ -19421,7 +19421,7 @@
             "Citrus",
             "Pungent"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Jack-Skellington",
@@ -21162,7 +21162,7 @@
         "flavours": [
             "nan"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Kraken",
@@ -22732,7 +22732,7 @@
             "Citrus",
             "Sweet"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Lime-Purple-Mist",
@@ -24076,7 +24076,7 @@
         "flavours": [
             "nan"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Mau-Mau",
@@ -24128,7 +24128,7 @@
             "Citrus",
             "Pungent"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Maui-Bubble-Gift",
@@ -26046,7 +26046,7 @@
             "Earthy",
             "Pungent"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Northern-Wreck",
@@ -26652,7 +26652,7 @@
             "Pungent",
             "Pine"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Old-Mother-Sativa",
@@ -26682,7 +26682,7 @@
             "Skunk",
             "Earthy"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Old-Toby",
@@ -27195,7 +27195,7 @@
             "Sweet",
             "Cheese"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Oregon-Pinot-Noir",
@@ -27231,7 +27231,7 @@
             "Pungent",
             "Tobacco"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Orient-Express",
@@ -28800,7 +28800,7 @@
             "Pine",
             "Sweet"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Plushberry",
@@ -28854,7 +28854,7 @@
             "Orange",
             "Spicy/Herbal"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Pokie",
@@ -29267,7 +29267,7 @@
             "Pine",
             "Flowery"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Pure-Power-Plant",
@@ -29728,7 +29728,7 @@
             "Earthy",
             "Woody"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Purple-Frost",
@@ -30421,7 +30421,7 @@
             "Tree",
             "Fruit"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Purple-Trainwreck",
@@ -31729,7 +31729,7 @@
             "Vanilla",
             "Pungent"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Rose-Bud",
@@ -32774,7 +32774,7 @@
             "Sweet",
             "Diesel"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Silver-Back",
@@ -35124,7 +35124,7 @@
             "Earthy",
             "Pungent"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Stella-Blue",
@@ -37029,7 +37029,7 @@
             "Skunk",
             "Pine"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Tangelo",
@@ -38676,7 +38676,7 @@
             "Apricot",
             "Skunk"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Tropicali",
@@ -40902,7 +40902,7 @@
             "Menthol",
             "Citrus"
         ],
-        "description": NaN
+        "description": ""
     },
     {
         "name": "Wonka-S-Bubbilicious",
