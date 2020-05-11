@@ -123,7 +123,7 @@ class StrainList extends Component {
             <button onClick={() => this.handleReset()}>reset</button>
             <div className={css(styles.strains)}>
                 {this.state.strainsToDisplay.map((strain, index) => (
-                    <Strain strain={strain} key={index}/>
+                    <Strain category={this.state.selectCategoryValue} strain={strain} key={index}/>
                 ))}
             </div>
         </div>

@@ -10,7 +10,7 @@ function Main() {
     return (
         <div className="Main">
             <Title />
-            {/* <Banner /> */}
+            <Banner />
             <StrainList />
         </div>
       );

@@ -49,7 +49,25 @@ const styles = StyleSheet.create({
     }
 });
 
-const Strain = ({strain}) => {
+const categoryMap = {
+    'aphrodisiac': 'aroused',
+    'social': 'talkative',
+    'appetite': 'hungry',
+    'creative': 'creative',
+    'productive': 'focused',
+    'soreness': 'relaxed',
+    'depression': 'happy',
+    'sleep': 'sleepy',
+    'anxiety': 'relaxed',
+}
+
+const flavoursMap = {
+    'coffee': 'brown',
+    'sweet': 'pink',
+    'honey': 'dark yellow',
+}
+
+const Strain = ({strain, category}) => {
 
   return (
     <div className={css(styles.strain)}>
