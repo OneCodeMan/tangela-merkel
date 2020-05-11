@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
 import Strain from '../../components/Strain/Strain';
-import Strain from '../../components/HorizontalSelector/HorizontalSelector';
+import HorizontalSelector from '../../components/HorizontalSelector/HorizontalSelector';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
@@ -26,15 +26,6 @@ const styles = StyleSheet.create({
         cursor: 'pointer'
     },
 
-
-    categoryOptionBackground: {
-      width: '40px',
-      height: '40px',
-      backgroundColor: 'blue',
-      borderRadius: '50%',
-      margin: '0 auto'
-    },
-
     strains: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -54,6 +45,9 @@ const categoryMap = {
     'sleep': strainCategories.sleepStrains,
     'anxiety': strainCategories.anxietyStrains,
 }
+
+const categoryKeys = _.keys(categoryMap);
+const categoryColours = ['red', 'black', 'blue', 'green', 'orange']; // TODO
 
 class StrainList extends Component {
   constructor(props) {
@@ -126,76 +120,15 @@ class StrainList extends Component {
         <div className={css(styles.container)}>
           <div className={css(styles.categorySelector)}>
 
-            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('all')}>
-              <div className={css(styles.categoryOptionBackground)}>
-              </div>
-              <div className={css(styles.categoryOptionText)}>
-                <p>All</p>
-              </div>
-            </div>
-
-            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('aphrodisiac')}>
-              <div className={css(styles.categoryOptionBackground)}>
-              </div>
-              <div className={css(styles.categoryOptionText)}>
-                <p>Aphrodisiac</p>
-              </div>
-            </div>
-
-
-            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('social')}>
-              <div className={css(styles.categoryOptionBackground)}>
-              </div>
-              <div className={css(styles.categoryOptionText)}>
-                <p>Social</p>
-              </div>
-            </div>
-
-            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('appetite')}>
-              <div className={css(styles.categoryOptionBackground)}>
-              </div>
-              <div className={css(styles.categoryOptionText)}>
-                <p>Appetite</p>
-              </div>
-            </div>
-
-            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('creative')}>
-              <div className={css(styles.categoryOptionBackground)}>
-              </div>
-              <div className={css(styles.categoryOptionText)}>
-                <p>Creative</p>
-              </div>
-            </div>
-
-            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('productive')}>
-              <div className={css(styles.categoryOptionBackground)}>
-              </div>
-              <div className={css(styles.categoryOptionText)}>
-                <p>Productive</p>
-              </div>
-            </div>
-
-            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('soreness')}>
-              <div className={css(styles.categoryOptionBackground)}>
-              </div>
-              <div className={css(styles.categoryOptionText)}>
-                <p>Soreness</p>
-              </div>
-            </div>
+            {categoryKeys.map((category, index) => (
+              <HorizontalSelector 
+                onClick={() => this.handleCategorySelect(category)}
+                colour="red"
+                text={category}
+             />
+            ))}
 
           </div>
-            {/* <select value={this.state.selectCategoryValue} onChange={this.handleCategorySelectValue}>
-                <option value="all">All</option>
-                <option value="aphrodisiac">Aphrodisiac</option>
-                <option value="social">Social</option>
-                <option value="appetite">Appetite</option>
-                <option value="creative">Creative</option>
-                <option value="productive">Productive</option>
-                <option value="soreness">Soreness</option>
-                <option value="depression">Depression</option>
-                <option value="sleep">Sleep</option>
-                <option value="anxiety">Anxiety</option>
-            </select> */}
             <select value={this.state.selectTypeValue} onChange={this.handleTypeSelectValue}>
                 <option value="all">All</option>
                 <option value="hybrid">Hybrid</option>
