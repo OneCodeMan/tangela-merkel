@@ -1,6 +1,8 @@
 import strainsJSONString from './cannabis.json';
+import _ from 'lodash';
 
 let cannabisJSON = strainsJSONString.filter(strain => !strain.effects.includes('None') && !strain.flavours.includes('None'));
+cannabisJSON.map(strain => strain.name = _.replace(strain.name, /-/g, " "));
 
 let aphrodisiacStrains = cannabisJSON.filter(strain => strain.effects.includes('Aphrodisiac') 
                                                     || strain.effects.includes('Tingly'));

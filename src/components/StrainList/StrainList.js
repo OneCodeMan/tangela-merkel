@@ -37,6 +37,7 @@ class StrainList extends Component {
         strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc').slice(0, 11),
         selectCategoryValue: 'all',
         selectTypeValue: 'all',
+        query: '',
     }
     this.handleCategorySelectValue = this.handleCategorySelectValue.bind(this);
     this.handleTypeSelectValue = this.handleTypeSelectValue.bind(this);
@@ -52,6 +53,10 @@ class StrainList extends Component {
     this.setState({ selectTypeValue: event.target.value});
  }
 
+ handleQueryChange(e) {
+    this.setState({ query: e.target.value });
+  }
+
   handleClick() {
       let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc')
       newStrainList = this.state.selectTypeValue === 'all' ? 
@@ -61,6 +66,16 @@ class StrainList extends Component {
       console.log(newStrainList);
       this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
     //   this.setState({ strainsToDisplay: newStrainList });
+  }
+
+  handleQuerySearch() {
+    let queryResults = categoryMap['all'];
+    let nameResults = queryResults.filter(strain => strain.name.toLowerCase().includes(this.state.query.toLowerCase()));
+    let descriptionResults = queryResults.filter(strain => strain.description.toLowerCase().includes(this.state.query.toLowerCase()));
+    let allResults = nameResults.concat(descriptionResults);
+    let finalResults = [... new Set(allResults)];
+    this.setState({ strainsToDisplay: finalResults});
+    this.setState({ query: '' });
   }
 
   render() {
@@ -85,6 +100,12 @@ class StrainList extends Component {
                 <option value="sativa">Sativa</option>
             </select>
             <button onClick={() => this.handleClick()}>select</button>
+            <input type="text"
+               className="search-input"
+               value={this.state.query}
+               onChange={this.handleQueryChange.bind(this)}
+              />
+            <button onClick={() => this.handleQuerySearch()}>search</button>
             <div className={css(styles.strains)}>
                 {this.state.strainsToDisplay.map((strain, index) => (
                     <Strain strain={strain} key={index}/>
