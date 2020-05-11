@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { findByText } from '@testing-library/react';
+import StarRatings from 'react-star-ratings';
 
 const styles = StyleSheet.create({
     strain: {
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     },
 
     type: {
-        
+        letterSpacing: '1px',
+        textTransform: 'uppercase'
     },
 
     rating: {
@@ -53,7 +54,13 @@ const Strain = ({strain}) => {
   return (
     <div className={css(styles.strain)}>
         <h1 className={css(styles.name)}>{strain.name}</h1>
-        <p className={css(styles.type)}>{strain.type} <span className={css(styles.rating)}>{strain.rating}</span></p>
+        <StarRatings
+        rating={strain.rating}
+        starDimension="40px"
+        starSpacing="1px"
+        starRatedColor="#DAC353"
+      />
+        <p className={css(styles.type)}>{strain.type}</p>
         <p className={css(styles.description)}>{strain.description}</p>
         <div className={css(styles.effectsDiv)}>
             <p className={css(styles.effects)}>
