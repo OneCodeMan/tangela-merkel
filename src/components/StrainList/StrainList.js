@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
 import Strain from '../../components/Strain/Strain';
+import Strain from '../../components/HorizontalSelector/HorizontalSelector';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
