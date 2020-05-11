@@ -34,7 +34,7 @@ class StrainList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc'),
+        strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc').slice(0, 9),
         items: 9,
         loading: false,
         selectCategoryValue: 'all',
