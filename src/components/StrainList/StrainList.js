@@ -3,7 +3,6 @@ import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
 import Strain from '../../components/Strain/Strain';
 import { StyleSheet, css } from 'aphrodite';
-import InfiniteScroll from 'react-infinite-scroller';
 
 const styles = StyleSheet.create({
     container: {
@@ -37,6 +36,7 @@ class StrainList extends Component {
     this.state = {
         strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc'),
         items: 9,
+        loading: false,
         selectCategoryValue: 'all',
         selectTypeValue: 'all',
         query: '',
@@ -89,15 +89,7 @@ class StrainList extends Component {
           this.setState({ strainsToDisplay: newStrainList });
     }
 
-  }
-
-  fetchMoreData = () => {
-        setTimeout(() => {
-        this.setState({
-            strainsToDisplay: this.state.strains.concat(5)
-        });
-        }, 1500);
-    };
+    }
 
   render() {
     return(
