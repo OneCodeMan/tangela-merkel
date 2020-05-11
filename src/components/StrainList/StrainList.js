@@ -10,6 +10,30 @@ const styles = StyleSheet.create({
         margin: '0 auto'
     },
 
+    categorySelector: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center'
+    },
+
+    categoryOptionWrapper: {
+        ':hover': {
+          backgroundColor: 'lightgray'
+        },
+        margin: '15px',
+        padding: '12px',
+        cursor: 'pointer'
+    },
+
+
+    categoryOptionBackground: {
+      width: '40px',
+      height: '40px',
+      backgroundColor: 'blue',
+      borderRadius: '50%',
+      margin: '0 auto'
+    },
+
     strains: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -48,6 +72,11 @@ class StrainList extends Component {
   handleCategorySelectValue(event) {
       console.log('category: ', event.target.value);
       this.setState({ selectCategoryValue: event.target.value});
+  }
+
+  handleCategorySelect(category) {
+    console.log('category: ', category);
+    this.setState({ selectCategoryValue: category});
   }
 
  handleTypeSelectValue(event) {
@@ -94,7 +123,67 @@ class StrainList extends Component {
   render() {
     return(
         <div className={css(styles.container)}>
-            <select value={this.state.selectCategoryValue} onChange={this.handleCategorySelectValue}>
+          <div className={css(styles.categorySelector)}>
+
+            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('all')}>
+              <div className={css(styles.categoryOptionBackground)}>
+              </div>
+              <div className={css(styles.categoryOptionText)}>
+                <p>All</p>
+              </div>
+            </div>
+
+            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('aphrodisiac')}>
+              <div className={css(styles.categoryOptionBackground)}>
+              </div>
+              <div className={css(styles.categoryOptionText)}>
+                <p>Aphrodisiac</p>
+              </div>
+            </div>
+
+
+            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('social')}>
+              <div className={css(styles.categoryOptionBackground)}>
+              </div>
+              <div className={css(styles.categoryOptionText)}>
+                <p>Social</p>
+              </div>
+            </div>
+
+            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('appetite')}>
+              <div className={css(styles.categoryOptionBackground)}>
+              </div>
+              <div className={css(styles.categoryOptionText)}>
+                <p>Appetite</p>
+              </div>
+            </div>
+
+            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('creative')}>
+              <div className={css(styles.categoryOptionBackground)}>
+              </div>
+              <div className={css(styles.categoryOptionText)}>
+                <p>Creative</p>
+              </div>
+            </div>
+
+            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('productive')}>
+              <div className={css(styles.categoryOptionBackground)}>
+              </div>
+              <div className={css(styles.categoryOptionText)}>
+                <p>Productive</p>
+              </div>
+            </div>
+
+            <div className={css(styles.categoryOptionWrapper)} onClick={() => this.handleCategorySelect('soreness')}>
+              <div className={css(styles.categoryOptionBackground)}>
+              </div>
+              <div className={css(styles.categoryOptionText)}>
+                <p>Soreness</p>
+              </div>
+            </div>
+
+          </div>
+            {/* <select value={this.state.selectCategoryValue} onChange={this.handleCategorySelectValue}>
                 <option value="all">All</option>
                 <option value="aphrodisiac">Aphrodisiac</option>
                 <option value="social">Social</option>
@@ -105,7 +194,7 @@ class StrainList extends Component {
                 <option value="depression">Depression</option>
                 <option value="sleep">Sleep</option>
                 <option value="anxiety">Anxiety</option>
-            </select>
+            </select> */}
             <select value={this.state.selectTypeValue} onChange={this.handleTypeSelectValue}>
                 <option value="all">All</option>
                 <option value="hybrid">Hybrid</option>
