@@ -3,6 +3,7 @@ import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
 import Strain from '../../components/Strain/Strain';
 import { StyleSheet, css } from 'aphrodite';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const styles = StyleSheet.create({
     container: {
@@ -34,7 +35,8 @@ class StrainList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc').slice(0, 11),
+        strains: _.orderBy(categoryMap.all, 'rating', 'desc'),
+        strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc').slice(0, 9),
         selectCategoryValue: 'all',
         selectTypeValue: 'all',
         query: '',
@@ -46,55 +48,55 @@ class StrainList extends Component {
   handleCategorySelectValue(event) {
       console.log('category: ', event.target.value);
       this.setState({ selectCategoryValue: event.target.value});
-
-      let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc');
-                           
-      console.log(newStrainList);
-      this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
   }
 
  handleTypeSelectValue(event) {
     console.log('type: ', event.target.value);
     this.setState({ selectTypeValue: event.target.value});
 
-    let newStrainList = this.state.selectTypeValue === 'all' ? 
-                        this.state.strainsToDisplay :
-                        this.state.strainsToDisplay.filter(strain => strain.type === event.target.value);
-                           
-    console.log('new strain list from handleSelectTypeValue', newStrainList);
-    this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
+    let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc');
+    newStrainList.filter(strain => strain.type === event.target.value);
   }  
 
  handleQueryChange(e) {
     this.setState({ query: e.target.value });
   }
 
-  handleClick() {
-      let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc')
-      newStrainList = this.state.selectTypeValue === 'all' ? 
-                    newStrainList :
-                    newStrainList.filter(strain => strain.type === this.state.selectTypeValue);
-                           
-      console.log(newStrainList);
-      this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
-    //   this.setState({ strainsToDisplay: newStrainList });
-  }
-
   handleReset() {
-      this.setState({ strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc').slice(0, 11) });
+      this.setState({ strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc') });
       this.setState({ selectCategoryValue: 'all' });
       this.setState({ selectTypeValue: 'all' });
   }
 
   handleQuerySearch() {
-    let queryResults = categoryMap['all'];
-    let nameResults = queryResults.filter(strain => strain.name.toLowerCase().includes(this.state.query.toLowerCase()));
-    let descriptionResults = queryResults.filter(strain => strain.description.toLowerCase().includes(this.state.query.toLowerCase()));
-    let allResults = nameResults.concat(descriptionResults);
-    let finalResults = [... new Set(allResults)];
-    this.setState({ strainsToDisplay: finalResults});
-    this.setState({ query: '' });
+    let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc')
+    newStrainList = this.state.selectTypeValue === 'all' ? 
+                    newStrainList :
+                    newStrainList.filter(strain => strain.type === this.state.selectTypeValue);
+                           
+    console.log(newStrainList);
+    // this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
+      this.setState({ strainsToDisplay: newStrainList });
+
+    if (this.state.query) {
+        let nameResults = newStrainList.filter(strain => strain.name.toLowerCase().includes(this.state.query.toLowerCase()));
+        let descriptionResults = newStrainList.filter(strain => strain.description.toLowerCase().includes(this.state.query.toLowerCase()));
+        let allResults = nameResults.concat(descriptionResults);
+        let finalResults = [... new Set(allResults)];
+        this.setState({ strainsToDisplay: finalResults});
+    } else {
+          this.setState({ strainsToDisplay: newStrainList });
+    }
+
   }
+
+  fetchMoreData = () => {
+        setTimeout(() => {
+        this.setState({
+            strainsToDisplay: this.state.strains.concat(5)
+        });
+        }, 1500);
+    };
 
   render() {
     return(
