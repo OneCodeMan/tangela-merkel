@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
 import Strain from '../../components/Strain/Strain';
+import { StyleSheet, css } from 'aphrodite';
+
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        margin: '0 auto'
+    },
+
+    strains: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+    },
+});
 
 const categoryMap = {
     'all': strainCategories.allStrains,
@@ -20,7 +34,7 @@ class StrainList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc'),
+        strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc').slice(0, 11),
         selectCategoryValue: 'all',
         selectTypeValue: 'all',
     }
@@ -40,14 +54,18 @@ class StrainList extends Component {
 
   handleClick() {
       let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc')
-                           .filter(strain => strain.type === this.state.selectTypeValue);
+      newStrainList = this.state.selectTypeValue === 'all' ? 
+                    newStrainList :
+                    newStrainList.filter(strain => strain.type === this.state.selectTypeValue);
+                           
       console.log(newStrainList);
-      this.setState({ strainsToDisplay: newStrainList });
+      this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
+    //   this.setState({ strainsToDisplay: newStrainList });
   }
 
   render() {
     return(
-        <div>
+        <div className={css(styles.container)}>
             <select value={this.state.selectCategoryValue} onChange={this.handleCategorySelectValue}>
                 <option value="all">All</option>
                 <option value="aphrodisiac">Aphrodisiac</option>
@@ -67,9 +85,11 @@ class StrainList extends Component {
                 <option value="sativa">Sativa</option>
             </select>
             <button onClick={() => this.handleClick()}>select</button>
-            {this.state.strainsToDisplay.map((strain, index) => (
-                <Strain strain={strain} key={index}/>
-            ))}
+            <div className={css(styles.strains)}>
+                {this.state.strainsToDisplay.map((strain, index) => (
+                    <Strain strain={strain} key={index}/>
+                ))}
+            </div>
         </div>
     )
   }
