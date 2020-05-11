@@ -65,6 +65,7 @@ const flavoursMap = {
     'coffee': 'brown',
     'sweet': 'pink',
     'honey': 'dark yellow',
+    'strawverry': 'pink'
 }
 
 const Strain = ({strain, category}) => {
