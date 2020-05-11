@@ -46,12 +46,24 @@ class StrainList extends Component {
   handleCategorySelectValue(event) {
       console.log('category: ', event.target.value);
       this.setState({ selectCategoryValue: event.target.value});
+
+      let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc');
+                           
+      console.log(newStrainList);
+      this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
   }
 
  handleTypeSelectValue(event) {
     console.log('type: ', event.target.value);
     this.setState({ selectTypeValue: event.target.value});
- }
+
+    let newStrainList = this.state.selectTypeValue === 'all' ? 
+                        this.state.strainsToDisplay :
+                        this.state.strainsToDisplay.filter(strain => strain.type === event.target.value);
+                           
+    console.log('new strain list from handleSelectTypeValue', newStrainList);
+    this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
+  }  
 
  handleQueryChange(e) {
     this.setState({ query: e.target.value });
@@ -66,6 +78,12 @@ class StrainList extends Component {
       console.log(newStrainList);
       this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
     //   this.setState({ strainsToDisplay: newStrainList });
+  }
+
+  handleReset() {
+      this.setState({ strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc').slice(0, 11) });
+      this.setState({ selectCategoryValue: 'all' });
+      this.setState({ selectTypeValue: 'all' });
   }
 
   handleQuerySearch() {
@@ -99,13 +117,14 @@ class StrainList extends Component {
                 <option value="indica">Indica</option>
                 <option value="sativa">Sativa</option>
             </select>
-            <button onClick={() => this.handleClick()}>select</button>
             <input type="text"
                className="search-input"
                value={this.state.query}
                onChange={this.handleQueryChange.bind(this)}
               />
             <button onClick={() => this.handleQuerySearch()}>search</button>
+            <br />
+            <button onClick={() => this.handleReset()}>reset</button>
             <div className={css(styles.strains)}>
                 {this.state.strainsToDisplay.map((strain, index) => (
                     <Strain strain={strain} key={index}/>
