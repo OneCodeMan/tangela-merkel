@@ -3,7 +3,7 @@ import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
 import Strain from '../../components/Strain/Strain';
 import { StyleSheet, css } from 'aphrodite';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const styles = StyleSheet.create({
     container: {
@@ -35,8 +35,8 @@ class StrainList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        strains: _.orderBy(categoryMap.all, 'rating', 'desc'),
-        strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc').slice(0, 9),
+        strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc'),
+        items: 9,
         selectCategoryValue: 'all',
         selectTypeValue: 'all',
         query: '',
@@ -57,7 +57,7 @@ class StrainList extends Component {
     let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc');
     newStrainList.filter(strain => strain.type === event.target.value);
   }  
-
+ 
  handleQueryChange(e) {
     this.setState({ query: e.target.value });
   }
@@ -84,6 +84,7 @@ class StrainList extends Component {
         let allResults = nameResults.concat(descriptionResults);
         let finalResults = [... new Set(allResults)];
         this.setState({ strainsToDisplay: finalResults});
+        this.setState({ query: '' });
     } else {
           this.setState({ strainsToDisplay: newStrainList });
     }
@@ -121,6 +122,7 @@ class StrainList extends Component {
             </select>
             <input type="text"
                className="search-input"
+               placeholder="enter a keyword.."
                value={this.state.query}
                onChange={this.handleQueryChange.bind(this)}
               />
