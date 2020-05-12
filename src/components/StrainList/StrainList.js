@@ -212,10 +212,9 @@ class StrainList extends Component {
             <div className={css(styles.searchContainer)}>
               <TextField 
                 id="outlined-basic" 
-                label="Search" 
+                label="Search (optional)" 
                 variant="outlined" 
                 className={css(styles.searchInput)}
-                placeholder="enter a keyword.."
                 value={this.state.query}
                 onChange={this.handleQueryChange.bind(this)}
               />
