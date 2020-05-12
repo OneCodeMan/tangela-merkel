@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
 import HorizontalSelector from '../../components/HorizontalSelector/HorizontalSelector';
+import Strain from '../../components/Strain/Strain';
 import { StyleSheet, css } from 'aphrodite';
 
 const ellipsisAnim = {
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        fontSize: '30px'
     },
 
     loadingEllipsis: {
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
         content: '...',
         width: '0px'
       },
-      fontSize: '30px'
     }
 });
 
@@ -121,13 +120,20 @@ class StrainList extends Component {
   }
 
   handleQuerySearch() {
+    this.setState({ loading: true });
+    setTimeout(
+      function() {
+          this.setState({ loading: false });
+      }
+      .bind(this),
+      200);
     let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc')
     newStrainList = this.state.selectTypeValue === 'all' ? 
                     newStrainList :
                     newStrainList.filter(strain => strain.type === this.state.selectTypeValue);
                            
-      console.log(newStrainList);
-      this.setState({ strainsToDisplay: newStrainList });
+    console.log(newStrainList);
+    this.setState({ strainsToDisplay: newStrainList });
 
     if (this.state.query) {
         let nameResults = newStrainList.filter(strain => strain.name.toLowerCase().includes(this.state.query.toLowerCase()));
@@ -139,8 +145,8 @@ class StrainList extends Component {
     } else {
           this.setState({ strainsToDisplay: newStrainList });
     }
+  }
 
-    }
 
   render() {
     return(
@@ -180,10 +186,11 @@ class StrainList extends Component {
             <br />
             <button onClick={() => this.handleReset()}>reset</button>
             <div className={css(styles.strains)}>
-                <JointLoadingAnimation />
-                {/* {this.state.strainsToDisplay.map((strain, index) => (
-                    <Strain category={this.state.selectCategoryValue} strain={strain} key={index}/>
-                ))} */}
+              {this.state.loading 
+              ? <JointLoadingAnimation />
+              : this.state.strainsToDisplay.map((strain, index) => (
+                <Strain category={this.state.selectCategoryValue} strain={strain} key={index}/>
+              ))}           
             </div>
         </div>
     )
