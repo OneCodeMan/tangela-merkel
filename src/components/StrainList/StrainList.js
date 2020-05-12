@@ -59,18 +59,22 @@ class StrainList extends Component {
         items: 9,
         loading: false,
         selectCategoryValue: 'all',
+        selectedCategory: [],
         selectTypeValue: 'all',
+        selectedType: [],
         query: '',
     }
   }
 
   handleCategorySelect(category) {
     console.log('category: ', category);
+    this.setState({ selectedCategory: [category] });
     this.setState({ selectCategoryValue: category});
   }
 
  handleTypeSelect(type) {
     console.log('type: ', type);
+    this.setState({ selectedType: [type] });
     this.setState({ selectTypeValue: type});
   }  
  
@@ -82,6 +86,8 @@ class StrainList extends Component {
       this.setState({ strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc') });
       this.setState({ selectCategoryValue: 'all' });
       this.setState({ selectTypeValue: 'all' });
+      this.setState({ selectedCategory: [] });
+      this.setState({ selectedType: [] });
   }
 
   handleQuerySearch() {
@@ -90,8 +96,7 @@ class StrainList extends Component {
                     newStrainList :
                     newStrainList.filter(strain => strain.type === this.state.selectTypeValue);
                            
-    console.log(newStrainList);
-    // this.setState({ strainsToDisplay: newStrainList.slice(0, 11) }); // just for debugging
+      console.log(newStrainList);
       this.setState({ strainsToDisplay: newStrainList });
 
     if (this.state.query) {
@@ -117,6 +122,7 @@ class StrainList extends Component {
                 onClick={() => this.handleCategorySelect(category)}
                 colour={categoryColours[index]}
                 text={category}
+                selected={this.state.selectedCategory.includes(category)}
              />
             ))}
           </div>
@@ -128,6 +134,7 @@ class StrainList extends Component {
                 onClick={() => this.handleTypeSelect(type)}
                 colour={typeColours[index]}
                 text={type}
+                selected={this.state.selectedType.includes(type)}
              />
             ))}
 
