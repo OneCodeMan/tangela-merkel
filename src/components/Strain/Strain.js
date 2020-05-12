@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
         borderRadius: '5px',
         fontFamily: 'Avenir Next',
         borderWidth: '0.5px',
-        borderColor: '#2F4858'
+        borderColor: '#2F4858',
+        minWidth: '400px'
     },
 
     name: {
@@ -67,10 +68,11 @@ const categoryMap = {
 }
 
 const flavoursMap = {
-    'coffee': 'brown',
-    'sweet': 'pink',
-    'honey': 'dark yellow',
-    'strawverry': 'pink'
+    'coffee': '#493B2A',
+    'sweet': '#FF66B3',
+    'honey': '#DCC48E',
+    'strawberry': '#F694C1',
+    'blueberry': '#648DE5'
 }
 
 // Sample URL: https://www.leafly.com/strains/alaska-thunder-grape
