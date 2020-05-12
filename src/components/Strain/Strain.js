@@ -4,6 +4,10 @@ import StarRatings from 'react-star-ratings';
 
 const styles = StyleSheet.create({
     strain: {
+        ':hover': {
+            cursor: 'pointer',
+            backgroundColor: 'green'
+        },
         border: 'solid',
         width: '30%',
         padding: '15px',
@@ -68,27 +72,35 @@ const flavoursMap = {
     'strawverry': 'pink'
 }
 
+// Sample URL: https://www.leafly.com/strains/alaska-thunder-grape
+function goToLeaflyURL(strainName) {
+    let baseURL = 'https://www.leafly.com/strains/';
+    let strainNameLowercasedWithHyphens = strainName.replace(/\s+/g, '-').toLowerCase();
+    let completeURL = baseURL + strainNameLowercasedWithHyphens;
+    window.open(completeURL, '_blank');
+}
+
 const Strain = ({strain, category}) => {
 
   return (
-    <div className={css(styles.strain)}>
+    <div className={css(styles.strain)} onClick={() => goToLeaflyURL(strain.name)}>
         <h1 className={css(styles.name)}>{strain.name}</h1>
-        <StarRatings
-        rating={strain.rating}
-        starDimension="40px"
-        starSpacing="1px"
-        starRatedColor="#DAC353"
-      />
-        <p className={css(styles.type)}>{strain.type}</p>
-        <p className={css(styles.description)}>{strain.description}</p>
-        <div className={css(styles.effectsDiv)}>
-            <p className={css(styles.effects)}>
-                <strong>Effects:</strong> {!strain.effects.includes("nan") ? strain.effects.join(", ") : "N/A"}
-            </p>
-            <p className={css(styles.flavours)}>
-                <strong>Flavours:</strong> {!strain.flavours.includes("nan") ? strain.flavours.join(", ") : "N/A"}
-            </p>
-        </div>
+            <StarRatings
+            rating={strain.rating}
+            starDimension="40px"
+            starSpacing="1px"
+            starRatedColor="#DAC353"
+        />
+            <p className={css(styles.type)}>{strain.type}</p>
+            <p className={css(styles.description)}>{strain.description}</p>
+            <div className={css(styles.effectsDiv)}>
+                <p className={css(styles.effects)}>
+                    <strong>Effects:</strong> {!strain.effects.includes("nan") ? strain.effects.join(", ") : "N/A"}
+                </p>
+                <p className={css(styles.flavours)}>
+                    <strong>Flavours:</strong> {!strain.flavours.includes("nan") ? strain.flavours.join(", ") : "N/A"}
+                </p>
+            </div>
     </div>
   );
 }
