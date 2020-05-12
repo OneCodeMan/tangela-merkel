@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import StarRatings from 'react-star-ratings';
+import styled from 'styled-components';
 
 const styles = StyleSheet.create({
     categorySelector: {
@@ -26,11 +27,22 @@ const styles = StyleSheet.create({
       },
 });
 
+function generateBackgroundStyle(colour) {
+    let desiredBackground = {
+        backgroundColor: colour,
+        width: '40px',
+        height: '40px',
+        borderRadius: '50%',
+        margin: '0 auto'
+    }
+    return desiredBackground;
+}
+
 const HorizontalSelector = ({onClick, colour, text}) => {
 
   return (
     <div className={css(styles.categoryOptionWrapper)} onClick={() => onClick(text)}>
-        <div className={css(styles.categoryOptionBackground)}>
+        <div className={css(styles.categoryOptionBackground)} style={generateBackgroundStyle(colour)}>
         </div>
         <div className={css(styles.categoryOptionTextDiv)}>
             <p className={css(styles.categoryOptionParagraph)}>{text}</p>

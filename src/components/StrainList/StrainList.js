@@ -47,7 +47,9 @@ const categoryMap = {
 }
 
 const categoryKeys = _.keys(categoryMap);
-const categoryColours = ['red', 'black', 'blue', 'green', 'orange']; // TODO
+const categoryColours = ['red', 'black', 'blue', 'green', 'orange', 'lightgreen', 'skyblue', 'magenta', 'pink', 'darkblue', 'purple']; // TODO
+const typeKeys = ['all', 'indica', 'sativa', 'hybrid'];
+const typeColours = ['green', 'darkblue', 'silver', 'darkorange'];
 
 class StrainList extends Component {
   constructor(props) {
@@ -60,13 +62,6 @@ class StrainList extends Component {
         selectTypeValue: 'all',
         query: '',
     }
-    this.handleCategorySelectValue = this.handleCategorySelectValue.bind(this);
-    this.handleTypeSelectValue = this.handleTypeSelectValue.bind(this);
-  }
-
-  handleCategorySelectValue(event) {
-      console.log('category: ', event.target.value);
-      this.setState({ selectCategoryValue: event.target.value});
   }
 
   handleCategorySelect(category) {
@@ -74,12 +69,9 @@ class StrainList extends Component {
     this.setState({ selectCategoryValue: category});
   }
 
- handleTypeSelectValue(event) {
-    console.log('type: ', event.target.value);
-    this.setState({ selectTypeValue: event.target.value});
-
-    let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc');
-    newStrainList.filter(strain => strain.type === event.target.value);
+ handleTypeSelect(type) {
+    console.log('type: ', type);
+    this.setState({ selectTypeValue: type});
   }  
  
  handleQueryChange(e) {
@@ -123,18 +115,24 @@ class StrainList extends Component {
             {categoryKeys.map((category, index) => (
               <HorizontalSelector 
                 onClick={() => this.handleCategorySelect(category)}
-                colour="red"
+                colour={categoryColours[index]}
                 text={category}
              />
             ))}
-
           </div>
-            <select value={this.state.selectTypeValue} onChange={this.handleTypeSelectValue}>
-                <option value="all">All</option>
-                <option value="hybrid">Hybrid</option>
-                <option value="indica">Indica</option>
-                <option value="sativa">Sativa</option>
-            </select>
+
+          <div className={css(styles.categorySelector)}>
+
+            {typeKeys.map((type, index) => (
+              <HorizontalSelector 
+                onClick={() => this.handleTypeSelect(type)}
+                colour={typeColours[index]}
+                text={type}
+             />
+            ))}
+
+           </div>
+
             <input type="text"
                className="search-input"
                placeholder="enter a keyword.."
