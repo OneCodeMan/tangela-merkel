@@ -32,6 +32,21 @@ const styles = StyleSheet.create({
         cursor: 'pointer'
     },
 
+    searchContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignContent: 'space-between',
+      width: '200px',
+      margin: '0 auto'
+      
+    },
+
+    searchButton: {
+      height: '30px',
+      margin: '2px'
+    },
+
     strains: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -176,15 +191,17 @@ class StrainList extends Component {
 
            </div>
 
-            <input type="text"
-               className="search-input"
-               placeholder="enter a keyword.."
-               value={this.state.query}
-               onChange={this.handleQueryChange.bind(this)}
-              />
-            <button onClick={() => this.handleQuerySearch()}>search</button>
-            <br />
-            <button onClick={() => this.handleReset()}>reset</button>
+            <div className={css(styles.searchContainer)}>
+              <input type="text"
+                className="search-input"
+                placeholder="enter a keyword.."
+                value={this.state.query}
+                onChange={this.handleQueryChange.bind(this)}
+                />
+              <button className={css(styles.searchButton)} onClick={() => this.handleQuerySearch()}>search</button>
+              <button className={css(styles.resetButton)} onClick={() => this.handleReset()}>reset</button>
+            </div>
+
             <div className={css(styles.strains)}>
               {this.state.loading 
               ? <JointLoadingAnimation />
