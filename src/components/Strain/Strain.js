@@ -83,10 +83,10 @@ const Strain = ({strain, category}) => {
         <p className={css(styles.description)}>{strain.description}</p>
         <div className={css(styles.effectsDiv)}>
             <p className={css(styles.effects)}>
-                <strong>Effects:</strong> {strain.effects.join(", ")}
+                <strong>Effects:</strong> {!strain.effects.includes("nan") ? strain.effects.join(", ") : "N/A"}
             </p>
             <p className={css(styles.flavours)}>
-                <strong>Flavours:</strong> {strain.flavours.join(", ")}
+                <strong>Flavours:</strong> {!strain.flavours.includes("nan") ? strain.flavours.join(", ") : "N/A"}
             </p>
         </div>
     </div>
