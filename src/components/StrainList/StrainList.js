@@ -159,7 +159,7 @@ class StrainList extends Component {
           this.setState({ loading: false });
       }
       .bind(this),
-      200);
+      1800);
     let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc')
     newStrainList = this.state.selectTypeValue === 'all' ? 
                     newStrainList :
