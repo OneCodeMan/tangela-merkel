@@ -4,6 +4,7 @@ import _ from 'lodash';
 import HorizontalSelector from '../../components/HorizontalSelector/HorizontalSelector';
 import Strain from '../../components/Strain/Strain';
 import { StyleSheet, css } from 'aphrodite';
+import { Button, TextField } from '@material-ui/core';
 
 const ellipsisAnim = {
   'to': {
@@ -23,13 +24,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
 
-    categoryOptionWrapper: {
-        ':hover': {
-          backgroundColor: 'lightgray'
-        },
-        margin: '15px',
-        padding: '12px',
-        cursor: 'pointer'
+    animationWrapper: {
+      padding: '10px'
     },
 
     searchContainer: {
@@ -43,14 +39,22 @@ const styles = StyleSheet.create({
     },
 
     searchButton: {
-      height: '30px',
-      margin: '2px'
+      height: '40px',
+      margin: '12px',
+      backgroundColor: '#4A6C6F',
+      fontFamily: 'Avenir Next'
+    },
+
+    resetButton: {
+      fontFamily: 'Avenir Next',
+      backgroundColor: '#393D3F',
     },
 
     strains: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        marginTop: '20px'
     },
 
     loadingEllipsis: {
@@ -82,13 +86,27 @@ const categoryMap = {
 }
 
 const categoryKeys = _.keys(categoryMap);
-const categoryColours = ['red', 'black', 'blue', 'green', 'orange', 'lightgreen', 'skyblue', 'magenta', 'pink', 'darkblue', 'purple']; // TODO
+const categoryColours = ['linear-gradient(to top left, #CA876B, #972C01)', 
+                        'linear-gradient(to left, #dd5e89, #f7bb97)', 
+                        'linear-gradient(to bottom right, #808AF4, #5D50DD)', 
+                        'linear-gradient(to top left, #1B16F0, #1EF152)', 
+                        'linear-gradient(to top left, #19598F, #24B7C0)', 
+                        'linear-gradient(to top left, #1E5483, #BB2175)', 
+                        'linear-gradient(to top left, #923B03, #FC9E6E)', 
+                        'linear-gradient(to bottom, #1E2689, #000000)', 
+                        'linear-gradient(to bottom right, #4D5EAD, #318FCA)', 
+                        'linear-gradient(to right, #E728FC, #46E9D7)', 
+                        'linear-gradient(to right, #E728FC, #46E9D7)']; 
+
 const typeKeys = ['all', 'indica', 'sativa', 'hybrid'];
-const typeColours = ['green', 'darkblue', 'silver', 'darkorange'];
+const typeColours = ['#00DB8B', 
+                    '#01FF5E', 
+                    '#219467', 
+                    'linear-gradient(to left, #01FF5E, #219467)'];
 
 const JointLoadingAnimation = () => {
   return (
-    <div>
+    <div className={css(styles.animationWrapper)}>
       <img src="https://i.gifer.com/4s2S.gif" alt="Spliff"></img>
       <div className={css(styles.loadingEllipsis)}>Loading...</div>
     </div>
@@ -192,14 +210,21 @@ class StrainList extends Component {
            </div>
 
             <div className={css(styles.searchContainer)}>
-              <input type="text"
-                className="search-input"
+              <TextField 
+                id="outlined-basic" 
+                label="Search" 
+                variant="outlined" 
+                className={css(styles.searchInput)}
                 placeholder="enter a keyword.."
                 value={this.state.query}
                 onChange={this.handleQueryChange.bind(this)}
-                />
-              <button className={css(styles.searchButton)} onClick={() => this.handleQuerySearch()}>search</button>
-              <button className={css(styles.resetButton)} onClick={() => this.handleReset()}>reset</button>
+              />
+              <Button variant="contained" color="primary" className={css(styles.searchButton)} onClick={() => this.handleQuerySearch()}>
+                search
+              </Button>
+              <Button variant="contained" color="primary" className={css(styles.resetButton)} onClick={() => this.handleReset()}>
+                reset
+              </Button>
             </div>
 
             <div className={css(styles.strains)}>

@@ -1,21 +1,21 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import StarRatings from 'react-star-ratings';
 
 const styles = StyleSheet.create({
     categorySelector: {
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'center'
+        justifyContent: 'center',
       },
   
       categoryOptionWrapper: {
           ':hover': {
-            backgroundColor: 'lightgray'
+            backgroundColor: 'rgb(83, 122, 90, 0.2)'
           },
           margin: '15px',
           padding: '12px',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          fontFamily: "Avenir Next",
       },
   
       categoryOptionBackground: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
       },
 
       categoryOptionWrapperSelected: {
-        background: 'lightgray',
+        background: 'rgb(83, 122, 90, 0.2)',
         margin: '15px',
         padding: '12px',
         cursor: 'pointer'
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 
 function generateBackgroundStyle(colour) {
     let desiredBackground = {
-        backgroundColor: colour,
+        background: colour,
         width: '40px',
         height: '40px',
         borderRadius: '50%',

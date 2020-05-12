@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     strain: {
         ':hover': {
             cursor: 'pointer',
-            backgroundColor: 'green'
+            backgroundColor: 'rgb(0, 62, 31, 0.7)',
+            color: 'white'
         },
         border: 'solid',
         width: '30%',
@@ -90,7 +91,7 @@ const Strain = ({strain, category}) => {
             starDimension="40px"
             starSpacing="1px"
             starRatedColor="#DAC353"
-        />
+            />
             <p className={css(styles.type)}>{strain.type}</p>
             <p className={css(styles.description)}>{strain.description}</p>
             <div className={css(styles.effectsDiv)}>
