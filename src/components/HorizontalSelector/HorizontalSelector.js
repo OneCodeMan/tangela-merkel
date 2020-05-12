@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import StarRatings from 'react-star-ratings';
-import styled from 'styled-components';
 
 const styles = StyleSheet.create({
     categorySelector: {
