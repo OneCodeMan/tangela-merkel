@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
-import Strain from '../../components/Strain/Strain';
 import HorizontalSelector from '../../components/HorizontalSelector/HorizontalSelector';
+import Strain from '../../components/Strain/Strain';
 import { StyleSheet, css } from 'aphrodite';
+
+const ellipsisAnim = {
+  'to': {
+    width: '1.25em'
+  }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -31,6 +37,20 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'center',
     },
+
+    loadingEllipsis: {
+      ':after': {
+        overflow: 'hidden',
+        display: 'inline-block',
+        verticalAlign: 'bottom',
+        animationName: [ellipsisAnim],
+        animationTimingFunction: 'steps(4, end)',
+        animationDuration: '900ms',
+        animationIterationCount: 'infinite',
+        content: '...',
+        width: '0px'
+      },
+    }
 });
 
 const categoryMap = {
@@ -50,6 +70,15 @@ const categoryKeys = _.keys(categoryMap);
 const categoryColours = ['red', 'black', 'blue', 'green', 'orange', 'lightgreen', 'skyblue', 'magenta', 'pink', 'darkblue', 'purple']; // TODO
 const typeKeys = ['all', 'indica', 'sativa', 'hybrid'];
 const typeColours = ['green', 'darkblue', 'silver', 'darkorange'];
+
+const JointLoadingAnimation = () => {
+  return (
+    <div>
+      <img src="https://i.gifer.com/4s2S.gif" alt="Spliff"></img>
+      <div className={css(styles.loadingEllipsis)}>Loading...</div>
+    </div>
+  )
+};
 
 class StrainList extends Component {
   constructor(props) {
@@ -91,13 +120,20 @@ class StrainList extends Component {
   }
 
   handleQuerySearch() {
+    this.setState({ loading: true });
+    setTimeout(
+      function() {
+          this.setState({ loading: false });
+      }
+      .bind(this),
+      200);
     let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc')
     newStrainList = this.state.selectTypeValue === 'all' ? 
                     newStrainList :
                     newStrainList.filter(strain => strain.type === this.state.selectTypeValue);
                            
-      console.log(newStrainList);
-      this.setState({ strainsToDisplay: newStrainList });
+    console.log(newStrainList);
+    this.setState({ strainsToDisplay: newStrainList });
 
     if (this.state.query) {
         let nameResults = newStrainList.filter(strain => strain.name.toLowerCase().includes(this.state.query.toLowerCase()));
@@ -109,8 +145,8 @@ class StrainList extends Component {
     } else {
           this.setState({ strainsToDisplay: newStrainList });
     }
+  }
 
-    }
 
   render() {
     return(
@@ -150,9 +186,11 @@ class StrainList extends Component {
             <br />
             <button onClick={() => this.handleReset()}>reset</button>
             <div className={css(styles.strains)}>
-                {this.state.strainsToDisplay.map((strain, index) => (
-                    <Strain category={this.state.selectCategoryValue} strain={strain} key={index}/>
-                ))}
+              {this.state.loading 
+              ? <JointLoadingAnimation />
+              : this.state.strainsToDisplay.map((strain, index) => (
+                <Strain category={this.state.selectCategoryValue} strain={strain} key={index}/>
+              ))}           
             </div>
         </div>
     )
