@@ -25,6 +25,13 @@ const styles = StyleSheet.create({
         borderRadius: '50%',
         margin: '0 auto'
       },
+
+      categoryOptionWrapperSelected: {
+        background: 'lightgray',
+        margin: '15px',
+        padding: '12px',
+        cursor: 'pointer'
+      },
 });
 
 function generateBackgroundStyle(colour) {
@@ -38,12 +45,24 @@ function generateBackgroundStyle(colour) {
     return desiredBackground;
 }
 
-const HorizontalSelector = ({onClick, colour, text}) => {
+const Option = ({colour}) => {
+  return (
+    <div 
+      className={css(styles.categoryOptionBackground)} 
+      style={generateBackgroundStyle(colour)}>
+    </div>
+  );
+}
+
+const HorizontalSelector = ({onClick, colour, text, selected}) => {
 
   return (
-    <div className={css(styles.categoryOptionWrapper)} onClick={() => onClick(text)}>
-        <div className={css(styles.categoryOptionBackground)} style={generateBackgroundStyle(colour)}>
-        </div>
+    <div className={selected ? css(styles.categoryOptionWrapperSelected)
+                             : css(styles.categoryOptionWrapper)} 
+          onClick={() => onClick(text)}
+    >
+        <Option 
+        colour={colour}/>
         <div className={css(styles.categoryOptionTextDiv)}>
             <p className={css(styles.categoryOptionParagraph)}>{text}</p>
         </div>
