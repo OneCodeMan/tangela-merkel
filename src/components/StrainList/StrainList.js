@@ -59,9 +59,9 @@ class StrainList extends Component {
         items: 9,
         loading: false,
         selectCategoryValue: 'all',
-        selectedCategory: [],
+        selectedCategory: ['all'],
         selectTypeValue: 'all',
-        selectedType: [],
+        selectedType: ['all'],
         query: '',
     }
   }
@@ -86,8 +86,8 @@ class StrainList extends Component {
       this.setState({ strainsToDisplay: _.orderBy(categoryMap.all, 'rating', 'desc') });
       this.setState({ selectCategoryValue: 'all' });
       this.setState({ selectTypeValue: 'all' });
-      this.setState({ selectedCategory: [] });
-      this.setState({ selectedType: [] });
+      this.setState({ selectedCategory: ['all'] });
+      this.setState({ selectedType: ['all'] });
   }
 
   handleQuerySearch() {
