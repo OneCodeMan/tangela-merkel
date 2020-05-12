@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     },
     title: {
         color: 'white',
-        fontSize: '45px'
+        fontSize: '45px',
+        cursor: 'pointer'
     }
 });
 

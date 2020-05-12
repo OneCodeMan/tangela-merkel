@@ -2,12 +2,28 @@ import React, { Component } from 'react';
 import strainCategories from '../../helpers/GenerateStrains';
 import _ from 'lodash';
 import Strain from '../../components/Strain/Strain';
+import HorizontalSelector from '../../components/HorizontalSelector/HorizontalSelector';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
     container: {
         width: '100%',
         margin: '0 auto'
+    },
+
+    categorySelector: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center'
+    },
+
+    categoryOptionWrapper: {
+        ':hover': {
+          backgroundColor: 'lightgray'
+        },
+        margin: '15px',
+        padding: '12px',
+        cursor: 'pointer'
     },
 
     strains: {
@@ -30,6 +46,11 @@ const categoryMap = {
     'anxiety': strainCategories.anxietyStrains,
 }
 
+const categoryKeys = _.keys(categoryMap);
+const categoryColours = ['red', 'black', 'blue', 'green', 'orange', 'lightgreen', 'skyblue', 'magenta', 'pink', 'darkblue', 'purple']; // TODO
+const typeKeys = ['all', 'indica', 'sativa', 'hybrid'];
+const typeColours = ['green', 'darkblue', 'silver', 'darkorange'];
+
 class StrainList extends Component {
   constructor(props) {
     super(props);
@@ -41,21 +62,16 @@ class StrainList extends Component {
         selectTypeValue: 'all',
         query: '',
     }
-    this.handleCategorySelectValue = this.handleCategorySelectValue.bind(this);
-    this.handleTypeSelectValue = this.handleTypeSelectValue.bind(this);
   }
 
-  handleCategorySelectValue(event) {
-      console.log('category: ', event.target.value);
-      this.setState({ selectCategoryValue: event.target.value});
+  handleCategorySelect(category) {
+    console.log('category: ', category);
+    this.setState({ selectCategoryValue: category});
   }
 
- handleTypeSelectValue(event) {
-    console.log('type: ', event.target.value);
-    this.setState({ selectTypeValue: event.target.value});
-
-    let newStrainList = _.orderBy(categoryMap[this.state.selectCategoryValue], 'rating', 'desc');
-    newStrainList.filter(strain => strain.type === event.target.value);
+ handleTypeSelect(type) {
+    console.log('type: ', type);
+    this.setState({ selectTypeValue: type});
   }  
  
  handleQueryChange(e) {
@@ -94,24 +110,29 @@ class StrainList extends Component {
   render() {
     return(
         <div className={css(styles.container)}>
-            <select value={this.state.selectCategoryValue} onChange={this.handleCategorySelectValue}>
-                <option value="all">All</option>
-                <option value="aphrodisiac">Aphrodisiac</option>
-                <option value="social">Social</option>
-                <option value="appetite">Appetite</option>
-                <option value="creative">Creative</option>
-                <option value="productive">Productive</option>
-                <option value="soreness">Soreness</option>
-                <option value="depression">Depression</option>
-                <option value="sleep">Sleep</option>
-                <option value="anxiety">Anxiety</option>
-            </select>
-            <select value={this.state.selectTypeValue} onChange={this.handleTypeSelectValue}>
-                <option value="all">All</option>
-                <option value="hybrid">Hybrid</option>
-                <option value="indica">Indica</option>
-                <option value="sativa">Sativa</option>
-            </select>
+          <div className={css(styles.categorySelector)}>
+
+            {categoryKeys.map((category, index) => (
+              <HorizontalSelector 
+                onClick={() => this.handleCategorySelect(category)}
+                colour={categoryColours[index]}
+                text={category}
+             />
+            ))}
+          </div>
+
+          <div className={css(styles.categorySelector)}>
+
+            {typeKeys.map((type, index) => (
+              <HorizontalSelector 
+                onClick={() => this.handleTypeSelect(type)}
+                colour={typeColours[index]}
+                text={type}
+             />
+            ))}
+
+           </div>
+
             <input type="text"
                className="search-input"
                placeholder="enter a keyword.."
