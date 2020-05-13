@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir Next',
         borderWidth: '0.5px',
         borderColor: '#2F4858',
-        minWidth: '400px'
+        minWidth: '370px'
     },
 
     name: {
