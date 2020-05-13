@@ -5,7 +5,6 @@ import HorizontalSelector from '../../components/HorizontalSelector/HorizontalSe
 import Strain from '../../components/Strain/Strain';
 import { StyleSheet, css } from 'aphrodite';
 import { Button, TextField } from '@material-ui/core';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 const ellipsisAnim = {
   'to': {
