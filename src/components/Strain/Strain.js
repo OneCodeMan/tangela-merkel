@@ -77,7 +77,7 @@ const flavoursMap = {
 
 // Sample URL: https://www.leafly.com/strains/alaska-thunder-grape
 function goToLeaflyURL(strainName) {
-    let baseURL = 'https://www.leafly.com/strains/';
+    let baseURL = 'https://weedmaps.com/';
     let strainNameLowercasedWithHyphens = strainName.replace(/\s+/g, '-').toLowerCase();
     let completeURL = baseURL + strainNameLowercasedWithHyphens;
     window.open(completeURL, '_blank');
